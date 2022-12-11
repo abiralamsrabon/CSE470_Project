@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDuQFuqc8FshlAgvbghNOMi8lyWKeMhuLI",
-  authDomain: "my-movie-application-844ab.firebaseapp.com",
-  projectId: "my-movie-application-844ab",
-  storageBucket: "my-movie-application-844ab.appspot.com",
-  messagingSenderId: "515276611726",
-  appId: "1:515276611726:web:c7da6862fe6908332669df"
+  apiKey: "AIzaSyBKDbAZFbQiUkcDpiwBCV9FmvPJcvmkL50",
+  authDomain: "showhouse-c16a6.firebaseapp.com",
+  projectId: "showhouse-c16a6",
+  storageBucket: "showhouse-c16a6.appspot.com",
+  messagingSenderId: "389209514248",
+  appId: "1:389209514248:web:00d80069391ec576924cbd"
 };
 
 // Initialize Firebase
