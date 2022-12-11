@@ -61,7 +61,7 @@ const Header = () => {
             <div className="header__wrap container">
                 <div className="logo">
                     <img src={logo} alt="" />
-                    <Link to="/"><span style={{ color: 'blue' }}>Show</span>House</Link>
+                    <Link to="/"><span style={{ color: 'Red' }}>Show</span>House</Link>
                 </div>
                 <ul className="header__nav">
                     {
