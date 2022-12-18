@@ -6,8 +6,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Button, { OutlineButton } from '../button/Button';
 import Modal, { ModalContent } from '../modal/Modal';
 
-import tmdbApi, { category, movieType } from '../../api/tmdbApi';
-import apiConfig from '../../api/apiConfig';
+import tmdbApi, { category, movieType } from '../../../controller/api/tmdbApi';
+import apiConfig from '../../../controller//api/apiConfig';
 
 import './hero-slide.scss';
 import { useHistory } from 'react-router';

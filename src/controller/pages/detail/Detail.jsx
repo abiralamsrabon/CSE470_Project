@@ -8,7 +8,7 @@ import './detail.scss';
 import CastList from './CastList';
 import VideoList from './VideoList';
 
-import MovieList from '../../components/movie-list/MovieList';
+import MovieList from '../../../view/components/movie-list/MovieList';
 
 const Detail = () => {
 

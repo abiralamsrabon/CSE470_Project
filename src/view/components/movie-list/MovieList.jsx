@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 
 import Button from '../button/Button';
 
-import tmdbApi, { category } from '../../api/tmdbApi';
-import apiConfig from '../../api/apiConfig';
+import tmdbApi, { category } from '../../../controller/api/tmdbApi';
+import apiConfig from '../../../controller/api/apiConfig';
 
 import MovieCard from '../movie-card/MovieCard';
 

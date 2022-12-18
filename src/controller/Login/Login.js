@@ -1,45 +1,52 @@
 import React, { useRef } from 'react';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
-import auth from '../firebase.init';
-import Loading from '../components/Loading/Loading';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { Link} from 'react-router-dom';
+import Loading from '../../view/components/Loading/Loading';
+import auth from '../../model/firebase.init';
 
-const SignUp = () => {
+
+const Login = () => {
     const emailRef = useRef('');
     const passRef = useRef('');
-    const nameRef = useRef('');
-    const [signInWithGoogle, gUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const [
-        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
-    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-    //const { register, formState: { errors }, handleSubmit } = useForm();
+    ] = useSignInWithEmailAndPassword(auth);
     let handleError;
-    if (loading || googleLoading || updating) {
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+    //const [token] = useToken(user || gUser)
+    //const navigate = Navigate();
+    // const location = useLocation();
+    // let from = location.state?.from?.pathname || "/";
+
+    // const navigateRegister = event => {
+        
+    // }
+    
+    if (loading || sending || gLoading) {
         return <Loading></Loading>
     }
-    if (error || googleError) {
-        handleError = <p className='text-red-500'><small>{error?.message || googleError?.message || updateError?.message}</small></p>
+    if (error || gError) {
+        handleError = <p className='text-warning fs-4'>Error:{error?.message || gError?.message}</p>
     }
 
     const formSubmit = async (e) => {
         e.preventDefault();
         const email = emailRef.current.value;
-        const name = nameRef.current.value;
         const password = passRef.current.value;
-        await createUserWithEmailAndPassword(email, password);
-        await updateProfile({ displayName: name });
+
+        await signInWithEmailAndPassword(email, password);
+        console.log("Login Successful")
+
     }
 
 
-    // const onSubmit = async data => {
-    //     await createUserWithEmailAndPassword(data.email, data.password);
-    //     
-    //     console.log('update done');
-    // }
+
+
+
     return (
         <div className='mt-5 pt-5 w-50 m-auto'>
             <div className="hero min-h-screen bg-base-200">
@@ -50,12 +57,6 @@ const SignUp = () => {
                     </div>
                     <form onSubmit={formSubmit} className="card flex-shrink-0 md:w-1/2 max-w-sm shadow-2xl bg-base-100 mb-5">
                         <div className="card-body">
-                            <div className="form-control mb-3">
-                                <label className="label">
-                                    <span className="label-text">Name</span>
-                                </label>
-                                <input type="text" required ref={nameRef} placeholder="Input your Name" className="input input-bordered bg-white text-dark" />
-                            </div>
                             <div className="form-control mb-3">
                                 <label className="label">
                                     <span className="label-text">Email</span>
@@ -73,9 +74,9 @@ const SignUp = () => {
                             </div>
                             {handleError}
                             <div className=" mt-2 mb-2">
-                                <button className="btn btn-warning">SignUp</button>
+                                <button className="btn btn-warning">Login</button>
                             </div>
-                            <p className='text-danger italic'>Already Have an account? <Link to="/login" className='text-primary no-underline'>Please Login</Link> </p>
+                            <p className='text-danger italic'>New to MovieDB? <Link to="/register" className='text-primary no-underline'>Please Register</Link> </p>
                             <div className="divider">OR</div>
                             <div
                                 onClick={() => signInWithGoogle()}
@@ -90,4 +91,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default Login;

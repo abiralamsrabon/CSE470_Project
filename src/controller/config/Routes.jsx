@@ -6,8 +6,8 @@ import Home from '../pages/Home';
 import Catalog from '../pages/Catalog';
 import Detail from '../pages/detail/Detail';
 import Login from '../Login/Login';
-import SignUp from './../Login/SignUp';
-import { MovieGrid } from '../components/movie-grid/MovieGrid';
+import SignUp from '../Login/SignUp';
+import { MovieGrid } from '../../view/components/movie-grid/MovieGrid';
 
 const Routes = () => {
     return (

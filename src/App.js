@@ -1,13 +1,13 @@
 import 'swiper/swiper.min.css';
-import './assets/boxicons-2.0.7/css/boxicons.min.css';
+import './view/assets/boxicons-2.0.7/css/boxicons.min.css';
 import './App.scss';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
+import Header from './view/components/header/Header';
+import Footer from './view/components/footer/Footer';
 
-import Routes from './config/Routes';
+import Routes from './controller/config/Routes';
 
 function App() {
     return (

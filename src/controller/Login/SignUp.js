@@ -1,52 +1,45 @@
 import React, { useRef } from 'react';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import { Link} from 'react-router-dom';
-import Loading from '../components/Loading/Loading';
-import auth from '../firebase.init';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
+import auth from '../../model/firebase.init';
+import Loading from '../../view/components/Loading/Loading';
 
-
-const Login = () => {
+const SignUp = () => {
     const emailRef = useRef('');
     const passRef = useRef('');
-    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const nameRef = useRef('');
+    const [signInWithGoogle, gUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const [
-        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useSignInWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    //const { register, formState: { errors }, handleSubmit } = useForm();
     let handleError;
-    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
-    //const [token] = useToken(user || gUser)
-    //const navigate = Navigate();
-    // const location = useLocation();
-    // let from = location.state?.from?.pathname || "/";
-
-    // const navigateRegister = event => {
-        
-    // }
-    
-    if (loading || sending || gLoading) {
+    if (loading || googleLoading || updating) {
         return <Loading></Loading>
     }
-    if (error || gError) {
-        handleError = <p className='text-warning fs-4'>Error:{error?.message || gError?.message}</p>
+    if (error || googleError) {
+        handleError = <p className='text-red-500'><small>{error?.message || googleError?.message || updateError?.message}</small></p>
     }
 
     const formSubmit = async (e) => {
         e.preventDefault();
         const email = emailRef.current.value;
+        const name = nameRef.current.value;
         const password = passRef.current.value;
-
-        await signInWithEmailAndPassword(email, password);
-        console.log("Login Successful")
-
+        await createUserWithEmailAndPassword(email, password);
+        await updateProfile({ displayName: name });
     }
 
 
-
-
-
+    // const onSubmit = async data => {
+    //     await createUserWithEmailAndPassword(data.email, data.password);
+    //     
+    //     console.log('update done');
+    // }
     return (
         <div className='mt-5 pt-5 w-50 m-auto'>
             <div className="hero min-h-screen bg-base-200">
@@ -57,6 +50,12 @@ const Login = () => {
                     </div>
                     <form onSubmit={formSubmit} className="card flex-shrink-0 md:w-1/2 max-w-sm shadow-2xl bg-base-100 mb-5">
                         <div className="card-body">
+                            <div className="form-control mb-3">
+                                <label className="label">
+                                    <span className="label-text">Name</span>
+                                </label>
+                                <input type="text" required ref={nameRef} placeholder="Input your Name" className="input input-bordered bg-white text-dark" />
+                            </div>
                             <div className="form-control mb-3">
                                 <label className="label">
                                     <span className="label-text">Email</span>
@@ -74,9 +73,9 @@ const Login = () => {
                             </div>
                             {handleError}
                             <div className=" mt-2 mb-2">
-                                <button className="btn btn-warning">Login</button>
+                                <button className="btn btn-warning">SignUp</button>
                             </div>
-                            <p className='text-danger italic'>New to MovieDB? <Link to="/register" className='text-primary no-underline'>Please Register</Link> </p>
+                            <p className='text-danger italic'>Already Have an account? <Link to="/login" className='text-primary no-underline'>Please Login</Link> </p>
                             <div className="divider">OR</div>
                             <div
                                 onClick={() => signInWithGoogle()}
@@ -91,4 +90,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;

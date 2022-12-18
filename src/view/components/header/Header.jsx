@@ -6,7 +6,7 @@ import './header.scss';
 
 import logo from '../../assets/tmovie.jpg';
 import { useAuthState,useSignOut } from 'react-firebase-hooks/auth';
-import auth from '../../firebase.init';
+import auth from '../../../model/firebase.init';
 
 const headerNav = [
     {

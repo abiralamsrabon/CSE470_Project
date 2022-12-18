@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 
 import Button from '../button/Button';
 
-import { category } from '../../api/tmdbApi';
-import apiConfig from '../../api/apiConfig';
+import { category } from '../../../controller/api/tmdbApi';
+import apiConfig from '../../../controller/api/apiConfig';
 
 const MovieCard = props => {
 

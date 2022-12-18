@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { OutlineButton } from '../components/button/Button';
-import HeroSlide from '../components/hero-slide/HeroSlide';
-import MovieList from '../components/movie-list/MovieList';
+import { OutlineButton } from '../../view/components/button/Button';
+import HeroSlide from '../../view/components/hero-slide/HeroSlide';
+import MovieList from '../../view/components/movie-list/MovieList';
 
 import { category, movieType, tvType } from '../api/tmdbApi';
 
